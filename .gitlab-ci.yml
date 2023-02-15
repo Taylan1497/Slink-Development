@@ -1,0 +1,19 @@
+image: python:latest
+
+build:
+  stage: build
+  script:
+    - pip install --no-cache-dir -r requirements.txt
+    - jupyter kernelspec list
+    - jupyter nbconvert --to html --ExecutePreprocessor.kernel_name=python3 --ExecutePreprocessor.timeout=-1 --execute merge.ipynb
+    - jupyter nbconvert --to html --ExecutePreprocessor.kernel_name=python3 --ExecutePreprocessor.timeout=-1 --execute assign.ipynb
+  artifacts:
+    paths:
+      - merge.html
+      - out/merged.h5
+      - assign.html
+      
+# One day, perhaps deploy artifacts to a EOS webpage using
+# https://gitlab.cern.ch/gitlabci-examples/deploy_eos
+# from
+# https://cern.service-now.com/service-portal?id=kb_article_view&sys_kb_id=848e699b4f76da00b8cbca1f0310c76b

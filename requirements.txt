@@ -1,0 +1,9 @@
+jupyter
+# pympler
+# tqdm
+pandas
+seaborn
+mip
+tables
+ortools
+optlang
